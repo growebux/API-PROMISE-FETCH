@@ -29,15 +29,14 @@ fetch(API_URL + "films")
     });
   })
 
-  
   // identify the error from the console
   .catch((error) => {
     console.warn(error);
     output.innerText = ":(";
+    
   })
-
-  .finally(
-    () => {
+// remove the spinner after the promise is fulfilled
+  .finally(() => {
       spinner.remove();
     });
 
