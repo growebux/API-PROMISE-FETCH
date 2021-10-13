@@ -1,10 +1,23 @@
 const API_URL = "https://starwars.egghead.training/";
+
+// call the ID by the name from html
+const output = document.getElementById("output");
+const spinner = document.getElementById("spinner");
+
 //information to display before the data arrives.
-output.innerText = "Loading...";
+//output.innerText = "Loading...";
+
+//return the film .sort by order, map with ep and title, and join everthing together with .join.
+function getFilmTitles(films) {
+  return films
+    .sort((a, b) => a.episode_id - b.episode_id)
+    .map((film) => `${film.episode_id}. ${film.title}`)
+    .join("\n");
+}
 
 //get content from the API_URL + the section films"
 fetch(API_URL + "films")
-//if the reponse is negative, throw a Error to display on the console.
+  //if the reponse is negative, throw a Error to display on the console.
   .then((response) => {
     if (!response.ok) {
       throw Error("Unsuccessful reponse");
@@ -16,16 +29,15 @@ fetch(API_URL + "films")
     });
   })
 
-  // identify the error from the console 
+  
+  // identify the error from the console
   .catch((error) => {
     console.warn(error);
-    output.innerText = ": (";
-  });
+    output.innerText = ":(";
+  })
 
-  //return the film .sort by order, map with ep and title, and join everthing together with .join.
-function getFilmTitles(films) {
-  return films
-    .sort((a, b) => a.episode_id - b.episode_id)
-    .map((film) => `${film.episode_id}. ${film.title}`)
-    .join("\n");
-}
+  .finally(
+    () => {
+      spinner.remove();
+    });
+
