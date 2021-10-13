@@ -33,10 +33,8 @@ fetch(API_URL + "films")
   .catch((error) => {
     console.warn(error);
     output.innerText = ":(";
-    
   })
-// remove the spinner after the promise is fulfilled
+  // remove the spinner after the promise is fulfilled
   .finally(() => {
-      spinner.remove();
-    });
-
+    spinner.remove();
+  });
