@@ -7,6 +7,11 @@ const spinner = document.getElementById("spinner");
 //information to display before the data arrives.
 //output.innerText = "Loading...";
 
+
+
+const delay = (ms) => new Promise(r => setTimeout(r, ms));
+
+
 //return the film .sort by order, map with ep and title, and join everthing together with .join.
 function getFilmTitles(films) {
   return films
@@ -16,9 +21,11 @@ function getFilmTitles(films) {
 }
 
 //get content from the API_URL + the section films"
-fetch(API_URL + "films")
+
+function fetchStarWars () {
+  fetch(API_URL + "films")
   //if the reponse is negative, throw a Error to display on the console.
-  .then((response) => {
+  .then( (response) => {
     if (!response.ok) {
       throw Error("Unsuccessful reponse");
     }
@@ -38,3 +45,8 @@ fetch(API_URL + "films")
   .finally(() => {
     spinner.remove();
   });
+}
+
+
+fetchStarWars()
+
